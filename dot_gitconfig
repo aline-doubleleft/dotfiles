@@ -1,0 +1,19 @@
+[push]
+	default = simple
+[alias]
+	st = status
+	ci = commit -v
+	co = checkout
+	br = branch
+	unstage = reset HEAD --
+	last = log -1 HEAD
+	pom = push origin master
+	pum = pull origin master
+	pod = push origin dev
+	pud = pull origin dev
+	pop = push origin dlapp
+	pup = pull origin dlapp
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false
