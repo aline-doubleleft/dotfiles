@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/Users/aline/Projects/github/globo-stockcar/application'
+let g:netrw_dirhist_2='/Users/aline/Projects/bitbucket/dl-mediadeploy'
+let g:netrw_dirhist_3='/Users/aline/Projects/bitbucket'
+let g:netrw_dirhist_4='/Users/aline/Projects/github/dl-api/api/app'
+let g:netrw_dirhist_5='/Users/aline/Projects/github/dl-api/api/app/bootstrap'
+let g:netrw_dirhist_6='/Users/aline/build/s3bucket-copy'
+let g:netrw_dirhist_7='/Users/aline/Projects/github'
+let g:netrw_dirhist_8='/Users/aline/Projects/kolab-dashboard'
+let g:netrw_dirhist_9='/Users/aline/Projects/kaiser-site/OLD_CODE'
