@@ -13,6 +13,7 @@
 	pud = pull origin dev
 	pop = push origin dlapp
 	pup = pull origin dlapp
+	logp = log --pretty=oneline
 [diff]
 	tool = vimdiff
 [difftool]
