@@ -4,3 +4,6 @@
 [submodule "dot_vim/bundle/vim-git"]
 	path = dot_vim/bundle/vim-git
 	url = git@github.com:tpope/vim-git.git
+[submodule "dot_bash-git-prompt"]
+	path = dot_bash-git-prompt
+	url = https://github.com/magicmonty/bash-git-prompt.git
