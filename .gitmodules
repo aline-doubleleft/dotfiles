@@ -7,3 +7,6 @@
 [submodule "dot_vim/bundle/vim-json"]
 	path = dot_vim/bundle/vim-json
 	url = git@github.com:elzr/vim-json.git
+[submodule "dot_vim/bundle/SudoEdit.vim"]
+	path = dot_vim/bundle/SudoEdit.vim
+	url = git@github.com:chrisbra/SudoEdit.vim.git
