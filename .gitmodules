@@ -7,3 +7,9 @@
 [submodule "dot_bash-git-prompt"]
 	path = dot_bash-git-prompt
 	url = https://github.com/magicmonty/bash-git-prompt.git
+[submodule "dot_vim/bundle/vim-json"]
+	path = dot_vim/bundle/vim-json
+	url = git@github.com:elzr/vim-json.git
+[submodule "dot_vim/bundle/SudoEdit.vim"]
+	path = dot_vim/bundle/SudoEdit.vim
+	url = git@github.com:chrisbra/SudoEdit.vim.git
