@@ -161,3 +161,7 @@ set smartindent
 set tabstop=4
 set shiftwidth=4
 set expandtab
+
+" tagbar
+nnoremap <silent> <Leader>b :TagbarToggle<CR>
+
