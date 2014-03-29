@@ -13,3 +13,9 @@
 [submodule "dot_vim/bundle/SudoEdit.vim"]
 	path = dot_vim/bundle/SudoEdit.vim
 	url = git@github.com:chrisbra/SudoEdit.vim.git
+[submodule "dot_vim/bundle/vim-easytags"]
+	path = dot_vim/bundle/vim-easytags
+	url = git@github.com:xolox/vim-easytags.git
+[submodule "dot_vim/bundle/vim-misc"]
+	path = dot_vim/bundle/vim-misc
+	url = git@github.com:xolox/vim-misc.git
