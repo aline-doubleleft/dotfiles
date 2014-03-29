@@ -165,3 +165,6 @@ set expandtab
 " tagbar
 nnoremap <silent> <Leader>b :TagbarToggle<CR>
 
+"ctrlp
+nnoremap <leader>. :CtrlPTag<cr>
+

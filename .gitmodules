@@ -28,3 +28,6 @@
 [submodule "dot_vim/bundle/ctrlp.vim"]
 	path = dot_vim/bundle/ctrlp.vim
 	url = git@github.com:kien/ctrlp.vim.git
+[submodule "dot_vim/bundle/code_complete"]
+	path = dot_vim/bundle/code_complete
+	url = git@github.com:elvestar/code_complete.git
