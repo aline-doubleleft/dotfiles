@@ -31,3 +31,6 @@
 [submodule "dot_vim/bundle/code_complete"]
 	path = dot_vim/bundle/code_complete
 	url = git@github.com:elvestar/code_complete.git
+[submodule "dot_vim/bundle/detectindent"]
+	path = dot_vim/bundle/detectindent
+	url = git@github.com:ciaranm/detectindent.git
