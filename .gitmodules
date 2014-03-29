@@ -19,3 +19,6 @@
 [submodule "dot_vim/bundle/vim-misc"]
 	path = dot_vim/bundle/vim-misc
 	url = git@github.com:xolox/vim-misc.git
+[submodule "dot_bash_prompt"]
+	path = dot_bash_prompt
+	url = https://gist.github.com/2920594.git
