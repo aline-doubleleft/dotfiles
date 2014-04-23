@@ -1,3 +1,5 @@
+[core]
+    include = /Users/aline/.gitconfig_credentials
 [push]
 	default = simple
 [alias]
@@ -17,5 +19,4 @@
 	tool = vimdiff
 [difftool]
     prompt = false
-[core]
-    include = /Users/aline/.gitconfig_credentials
+
