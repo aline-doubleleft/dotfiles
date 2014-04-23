@@ -11,10 +11,11 @@
 	pum = pull origin master
 	pod = push origin dev
 	pud = pull origin dev
-	pop = push origin dlapp
-	pup = pull origin dlapp
-	logp = log --pretty=oneline
+	pop = push origin prod
+	pup = pull origin prod
 [diff]
 	tool = vimdiff
 [difftool]
-	prompt = false
+    prompt = false
+[core]
+    include = /Users/aline/.gitconfig_credentials
