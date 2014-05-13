@@ -3,7 +3,7 @@
 [push]
 	default = simple
 [alias]
-	st = status
+	st = status -sb
 	ci = commit -v
 	co = checkout
 	br = branch
@@ -15,9 +15,14 @@
 	pud = pull origin dev
 	pop = push origin prod
 	pup = pull origin prod
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 [diff]
 	tool = vimdiff
 [difftool]
     prompt = false
 
 
+[color]
+	ui = auto
+[core]
+	pager = less
