@@ -105,7 +105,10 @@ endif " has("autocmd")
 au BufRead ~/.mutt/temp/mutt-* set tw=72
 set clipboard=unnamed
 
-execute pathogen#infect()
+filetype on
+filetype off
+call pathogen#infect()
+filetype plugin indent on
 
 let g:colors_name = expand('<sfile>:t:r')
 
