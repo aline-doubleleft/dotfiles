@@ -19,7 +19,7 @@
 [diff]
 	tool = vimdiff
 [difftool]
-    prompt = false
+	prompt = false
 
 
 [color]
