@@ -26,3 +26,5 @@
 	ui = auto
 [core]
 	pager = less
+[mergetool]
+	prompt = false
