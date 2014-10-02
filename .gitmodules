@@ -43,3 +43,6 @@
 [submodule "dot_vim/bundle/vim-nerdtree-tabs"]
 	path = dot_vim/bundle/vim-nerdtree-tabs
 	url = git@github.com:jistr/vim-nerdtree-tabs.git
+[submodule "dot_vim/bundle/vim-ipython"]
+	path = dot_vim/bundle/vim-ipython
+	url = git@github.com:ivanov/vim-ipython.git
