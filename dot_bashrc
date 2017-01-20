@@ -14,15 +14,11 @@ if [[ $- != *i* ]] ; then
     return
 fi
 
-
-# Put your fun stuff here.
-# if [[ $(tty) == /dev/tty1 ]]; then
-#     exec startx 1>~/.log/xsession-errors 2>&1 &
-# fi
-
-if [[ -n "$DISPLAY" ]] && [[ -f /usr/share/powerline/bash/powerline.sh ]]; then
-    source /usr/share/powerline/bash/powerline.sh
-fi
+case $(tty) in /dev/pts/[0-9]*)
+        POWERLINE_BASH_CONTINUATION=1
+        POWERLINE_BASH_SELECT=1
+        . /usr/share/powerline/bash/powerline.sh
+esac
 
 set -o vi
 complete -cf sudo
