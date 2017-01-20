@@ -1,27 +1,19 @@
 [include]
-    path = /Users/alinefreitas/.gitconfig_credentials
+    path = /home/aline/.gitconfig_credentials
 [push]
 	default = simple
 [alias]
 	st = status -sb
-	ci = commit -v
+	ci = commit -v -S
 	co = checkout
 	br = branch
 	unstage = reset HEAD --
 	last = log -1 HEAD
-	pom = push origin master
-	pum = pull origin master
-	pod = push origin dev
-	pud = pull origin dev
-	pop = push origin prod
-	pup = pull origin prod
-	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --show-signature
 [diff]
 	tool = vimdiff
 [difftool]
 	prompt = false
-
-
 [color]
 	ui = auto
 [core]
@@ -31,3 +23,9 @@
 [merge]
 	tool = vimdiff
 	conflictstyle = diff3
+[branch]
+	autosetuprebase = always
+[commit]
+	gpgsign = true
+[credential]
+	helper = /usr/bin/git-credential-gnome-keyring
