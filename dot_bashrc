@@ -1,0 +1,68 @@
+# /etc/skel/.bashrc
+#
+# This file is sourced by all *interactive* bash shells on startup,
+# including some apparently interactive shells such as scp and rcp
+# that can't tolerate any output.  So make sure this doesn't display
+# anything or bad things will happen !
+
+
+# Test for an interactive shell.  There is no need to set anything
+# past this point for scp and rcp, and it's important to refrain from
+# outputting anything in those cases.
+if [[ $- != *i* ]] ; then
+    # Shell is non-interactive.  Be done now!
+    return
+fi
+
+
+# Put your fun stuff here.
+# if [[ $(tty) == /dev/tty1 ]]; then
+#     exec startx 1>~/.log/xsession-errors 2>&1 &
+# fi
+
+if [[ -n "$DISPLAY" ]] && [[ -f /usr/share/powerline/bash/powerline.sh ]]; then
+    source /usr/share/powerline/bash/powerline.sh
+fi
+
+set -o vi
+complete -cf sudo
+alias sudo='sudo '
+alias ls='ls -B --color=auto'
+alias mutt='cd ~/attachments && mutt; cd -'
+alias ubuntu-chromium='cd ~/Projects/ubuntu && vagrant up && vagrant ssh -c "/usr/local/bin/warsaw/core && chromium-browser" && vagrant halt; cd -'
+alias whonix='cd ~/Projects/whonix && vagrant snapshot pop --no-delete && vagrant ssh workstation -c torbrowser && vagrant halt; cd -'
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
+
+export PATH=${PATH}:/usr/local/sbin:/usr/sbin:/sbin:/opt/android-sdk-update-manager/tools:/opt/android-sdk-update-manager/platform-tools:~/.gem/ruby/2.1.0/bin
+export USE_CCACHE=1
+export ANDROID_CCACHE_DIR="$HOME/android/.ccache"
+export ANDROID_CCACHE_SIZE="50G"
+
+function vssh () {
+    ssh -t $1 "bash -i -o vi"
+}
+
+alias ssh=vssh
+
+function fmod() { 
+    [ "$1" = '' ] && find /lib/modules/$(uname -r) -iname *.ko -print | awk -F $(uname -r)/ '{print $NF}' 
+    [ "$1" != '' ] && find /lib/modules/$(uname -r) -iname "$1".ko -print | awk -F $(uname -r)/ '{print $NF}' 
+}
+
+cd () { builtin cd "$@" && chpwd; }
+pushd () { builtin pushd "$@" && chpwd; }
+popd () { builtin popd "$@" && chpwd; }
+unset_all_project_settings () {
+    export PATH=~/bin:/usr/local/bin:/usr/bin:/bin:/opt/bin:/usr/x86_64-pc-linux-gnu/gcc-bin/4.9.3:/opt/android-sdk-update-manager/tools:/opt/android-sdk-update-manager/platform-tools:/usr/local/sbin:/usr/sbin:/sbin
+}
+chpwd () {
+  case $PWD in
+    ~/Projects/pentest-env) export PATH=~/Projects/pentest-env/bin:${PATH};;
+    *) unset_all_project_settings;;
+  esac
+}
+
+function mm() {
+    mpv --no-video --ytdl-format=bestaudio ytdl://ytsearch10:"$@"
+}

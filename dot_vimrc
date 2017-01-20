@@ -1,27 +1,61 @@
+" An example for a vimrc file.
+"
+" Maintainer:	Bram Moolenaar <Bram@vim.org>
+" Last change:	2015 Mar 24
+"
+" To use it, copy it to
+"     for Unix and OS/2:  ~/.vimrc
+"	      for Amiga:  s:.vimrc
+"  for MS-DOS and Win32:  $VIM\_vimrc
+"	    for OpenVMS:  sys$login:.vimrc
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin('~/.vim/bundle')
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'Lokaltog/vim-distinguished'
+Plugin 'hashivim/vim-vagrant'
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'saltstack/salt-vim'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'nvie/vim-flake8'
+Plugin 'stephpy/vim-yaml'
+Plugin 'lepture/vim-jinja'
+Plugin 'chrisbra/SudoEdit.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'vim-scripts/iptables'
+
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+set rtp+=/usr/lib64/python3.4/site-packages/powerline/bindings/vim
+
 " When started as "evim", evim.vim will already have done these settings.
 if v:progname =~? "evim"
   finish
 endif
 
-" Use Vim settings, rather then Vi settings (much better!).
+" Use Vim settings, rather than Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
-if has("vms")
-  set nobackup		" do not keep a backup file, use versions instead
-else
-  set backup		" keep a backup file
-endif
+set backupdir=./.backup,.,/tmp
+set directory=.,./.backup,/tmp
+
 set history=50		" keep 50 lines of command line history
 set ruler		" show the cursor position all the time
 set showcmd		" display incomplete commands
 set incsearch		" do incremental searching
-
-" For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
-" let &guioptions = substitute(&guioptions, "t", "", "g")
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
@@ -61,12 +95,14 @@ if has("autocmd")
   " When editing a file, always jump to the last known cursor position.
   " Don't do it when the position is invalid or when inside an event handler
   " (happens when dropping a file on gvim).
-  " Also don't do it when the mark is in the first line, that is the default
-  " position when opening a file.
   autocmd BufReadPost *
-    \ if line("'\"") > 1 && line("'\"") <= line("$") |
+    \ if line("'\"") >= 1 && line("'\"") <= line("$") |
     \   exe "normal! g`\"" |
     \ endif
+
+  autocmd Filetype html setlocal ts=2 sts=2 sw=2
+  autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
+  autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
 
   augroup END
 
@@ -80,100 +116,44 @@ endif " has("autocmd")
 " file it was loaded from, thus the changes you made.
 " Only define it when not defined already.
 if !exists(":DiffOrig")
-  command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
+  command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
 		  \ | wincmd p | diffthis
 endif
 
-" Spell Check
-" Only do this part when compiled with support for autocommands.
+if has('langmap') && exists('+langnoremap')
+  " Prevent that the langmap option applies to characters that result from a
+  " mapping.  If unset (default), this may break plugins (but it's backward
+  " compatible).
+  set langnoremap
+endif
 
-if has("autocmd")
-    " disable autoindent, make the background dark, change the colorscheme to
-    " suit the dark background, make sure our textwidth is 72 characters and
-    " disable line numbering for email
-    autocmd FileType mail set noautoindent |
-        \ set nosmartindent |
-        \ set background=dark |
-        \ colorscheme evening |
-        \ set textwidth=72 |
-        \ set nonumber |
-        \ set spell spelllang=pt |
-    	\ hi clear SpellBad |
-	\ hi SpellBad cterm=underline ctermfg=red
-endif " has("autocmd")
+syntax enable
+set background=dark
+let g:solarized_termcolors=256
+colorscheme solarized
 
-au BufRead ~/.mutt/temp/mutt-* set tw=72
-set clipboard=unnamed
+" Powerline
+set laststatus=2
+set showtabline=2
+set noshowmode
+set t_Co=256
+let g:Powerline_symbols = 'fancy'
+set encoding=utf-8
 
-filetype on
-filetype off
-call pathogen#infect()
-filetype plugin indent on
-
-let g:colors_name = expand('<sfile>:t:r')
-
-highlight Normal ctermfg=Gray ctermbg=Black guifg=Gray guibg=Black
-highlight TabLineSel cterm=NONE ctermfg=fg ctermbg=Blue gui=NONE guifg=fg guibg=Blue
-highlight TabLine cterm=NONE ctermfg=bg ctermbg=fg gui=NONE guifg=bg guibg=fg
-highlight TabLineFill cterm=NONE ctermfg=bg ctermbg=fg gui=NONE guifg=bg guibg=fg
-highlight Title cterm=NONE ctermfg=Red gui=NONE guifg=Red
-highlight MatchParen cterm=NONE ctermfg=Red ctermbg=bg gui=NONE guifg=Red guibg=bg
-highlight FoldColumn cterm=NONE ctermfg=bg ctermbg=fg gui=NONE guifg=bg guibg=fg
-highlight Folded cterm=NONE ctermfg=Cyan ctermbg=bg gui=NONE guifg=Cyan guibg=bg
-highlight StatusLine cterm=NONE ctermfg=fg ctermbg=Blue gui=NONE guifg=fg guibg=Blue
-highlight StatusLineNC cterm=NONE ctermfg=bg ctermbg=fg gui=NONE guifg=bg guibg=fg
-highlight DiffAdd cterm=NONE ctermfg=bg ctermbg=Green gui=NONE guifg=bg guibg=Green
-highlight DiffDelete cterm=NONE ctermfg=bg ctermbg=Red gui=NONE guifg=bg guibg=Red
-highlight DiffChange cterm=NONE ctermfg=bg ctermbg=Yellow gui=NONE guifg=bg guibg=Yellow
-highlight DiffText cterm=NONE ctermfg=bg ctermbg=Magenta gui=NONE guifg=bg guibg=Magenta
-highlight Pmenu cterm=NONE ctermfg=bg ctermbg=White gui=NONE guifg=bg guibg=White
-highlight PmenuSel cterm=NONE ctermfg=White ctermbg=Blue gui=NONE guifg=White guibg=Blue
-highlight PmenuSbar cterm=NONE ctermfg=Yellow ctermbg=Yellow gui=NONE guifg=Yellow guibg=Yellow
-highlight PmenuThumb cterm=NONE ctermfg=bg ctermbg=bg gui=NONE guifg=bg guibg=bg
-highlight SpellBad cterm=underline ctermfg=DarkRed ctermbg=bg gui=undercurl guisp=Red
-
-" Small function to swap vim panels
-" Mark with \mw, move to wanted place with ctrl+w/ctrl+w and swipe with \pw
-function! MarkWindowSwap()
-    let g:markedWinNum = winnr()
-endfunction
-
-function! DoWindowSwap()
-    "Mark destination
-    let curNum = winnr()
-    let curBuf = bufnr( "%" )
-    exe g:markedWinNum . "wincmd w"
-    "Switch to source and shuffle dest->source
-    let markedBuf = bufnr( "%" )
-    "Hide and open so that we aren't prompted and keep history
-    exe 'hide buf' curBuf
-    "Switch to dest and shuffle source->dest
-    exe curNum . "wincmd w"
-    "Hide and open so that we aren't prompted and keep history
-    exe 'hide buf' markedBuf 
-endfunction
-
-nmap <silent> <leader>mw :call MarkWindowSwap()<CR>
-nmap <silent> <leader>pw :call DoWindowSwap()<CR>
-
-" \+ or \- to resize
-nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
-nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
-
-set smartindent
+" Indentation
 set tabstop=4
 set shiftwidth=4
+set softtabstop=4
+" set smarttab
 set expandtab
 
-" tagbar
-nnoremap <silent> <Leader>b :TagbarToggle<CR>
+autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 
-"ctrlp
-nnoremap <leader>. :CtrlPTag<cr>
+let mapleader=","
+let g:indent_guides_start_level=2
+let g:indent_guides_guide_size=1
+let g:indent_guides_enable_on_vim_startup = 1
+autocmd BufWritePost *.py call Flake8()
 
-" let g:nerdtree_tabs_open_on_console_startup=1
-
-" vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>
-" nmap <C-v> :call setreg("\"",system("pbpaste"))<CR>p
-
-autocmd VimEnter * NERDTree | wincmd p
+" iptables
+au BufNewFile,BufRead *.rules set filetype=iptables

@@ -1,7 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_cnt =3
 let g:netrw_dirhist_1='/home/aline/.config/awesome'
 let g:netrw_dirhist_2='/home/aline/Downloads'
 let g:netrw_dirhist_3='/etc/zfs'
-let g:netrw_dirhist_4='/etc/xdg/powerline/colorschemes'
-let g:netrw_dirhist_5='/home/aline/bin'
